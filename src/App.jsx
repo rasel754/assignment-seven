@@ -5,19 +5,32 @@ import Banner from './components/Header/Banner'
 import Header from './components/Header/Header'
 import Items from './components/Items/Items'
 import CookHere from './components/cookArea/CookHere'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
+
   const [cookie , setCookie] =useState([])
+  const [preparing , setPreparing] =useState([])
+
   const handelCookie = (item)=> {
     const isExist = cookie.find(checkItem => checkItem.id===item.id)
     if(!isExist){
       setCookie([...cookie,item]);
     }
     else{
-      alert("already set cookie")
-    }
-    // const newCookie =[...cookie,item];
-    
+      toast("this recipe selected already")
+    }   
+  }
+  const handelPreparing =(id)=>{
+    const newCookie =cookie.filter(item=>item.id!==id)
+    setCookie(newCookie)
+    // const isExist = preparing.find(checkItem => checkItem.id===id.id)
+    // if(!isExist) {
+    //   setPreparing([...preparing,item])
+    // }
+
   }
 
   return (
@@ -32,7 +45,8 @@ function App() {
       </div>
       <div className='md:flex gap-7'>
       <Items handelCookie={handelCookie}></Items>
-      <CookHere cookie={cookie}></CookHere>
+      <CookHere handelPreparing={handelPreparing} cookie={cookie} preparing={preparing}></CookHere>
+      <ToastContainer/>
       </div>
       
     </>

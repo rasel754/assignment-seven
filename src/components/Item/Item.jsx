@@ -1,7 +1,7 @@
 
 
 const Item = ({item,handelCookie}) => {
-    console.log(handelCookie)
+    // console.log(handelCookie)
     const {recipe_image,recipe_name,short_description ,ingredients ,preparing_time ,calories ,} = item;
     return (
         
