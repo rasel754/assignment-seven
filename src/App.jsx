@@ -1,4 +1,5 @@
 
+import { useState } from 'react'
 import './App.css'
 import Banner from './components/Header/Banner'
 import Header from './components/Header/Header'
@@ -6,6 +7,18 @@ import Items from './components/Items/Items'
 import CookHere from './components/cookArea/CookHere'
 
 function App() {
+  const [cookie , setCookie] =useState([])
+  const handelCookie = (item)=> {
+    const isExist = cookie.find(checkItem => checkItem.id===item.id)
+    if(!isExist){
+      setCookie([...cookie,item]);
+    }
+    else{
+      alert("already set cookie")
+    }
+    // const newCookie =[...cookie,item];
+    
+  }
 
   return (
     <>
@@ -18,8 +31,8 @@ function App() {
         <p className='font-normal text-[#150B2B99] mb-12 md:px-60'>Our Recipes: A platform offering diverse culinary inspirations, from simple weekday meals to gourmet delights. Explore, create, and share your culinary adventures with an engaged communityZ</p>
       </div>
       <div className='md:flex gap-7'>
-      <Items></Items>
-      <CookHere></CookHere>
+      <Items handelCookie={handelCookie}></Items>
+      <CookHere cookie={cookie}></CookHere>
       </div>
       
     </>
